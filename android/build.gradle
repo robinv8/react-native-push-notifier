@@ -55,5 +55,6 @@ repositories {
 
 dependencies {
     //noinspection GradleDynamicVersion
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "com.facebook.react:react-native:+"
+  implementation files('libs/MiPush_SDK_Client_4_9_0.jar')  // From node_modules
 }
