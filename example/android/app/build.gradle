@@ -203,7 +203,6 @@ dependencies {
     } else {
         implementation jscFlavor
     }
-
     implementation project(':reactnativepushnotifier')
 }
 

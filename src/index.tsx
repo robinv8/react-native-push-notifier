@@ -16,6 +16,13 @@ const MiPush = NativeModules.MiPushNotifier
         },
       }
     );
+
+enum NotifyType {
+  DEFAULT_SOUND = 1,
+  DEFAULT_VIBRATE = 2,
+  DEFAULT_LIGHTS = 4,
+  DEFAULT_ALL = -1,
+}
 const MiPushNotifier = {
   /**
    * @description 注册MiPush推送服务
@@ -52,7 +59,7 @@ const MiPushNotifier = {
    * @param alias 为指定用户设置别名
    * @param category 扩展参数，暂时没有用途，直接填null
    */
-  setAlias(alias: string, category: any) {
+  setAlias(alias: string, category: any = null) {
     MiPush.setAlias(alias, category);
   },
 
@@ -61,7 +68,7 @@ const MiPushNotifier = {
    * @param alias 为指定用户取消别名
    * @param category 扩展参数，暂时没有用途，直接填null
    */
-  unsetAlias(alias: string, category: any) {
+  unsetAlias(alias: string, category: any = null) {
     MiPush.unsetAlias(alias, category);
   },
 
@@ -70,7 +77,7 @@ const MiPushNotifier = {
    * @param userAccount 为指定用户设置userAccount
    * @param category 扩展参数，暂时没有用途，直接填null
    */
-  setUserAccount(userAccount: string, category: any) {
+  setUserAccount(userAccount: string, category: any = null) {
     MiPush.setUserAccount(userAccount, category);
   },
 
@@ -79,7 +86,7 @@ const MiPushNotifier = {
    * @param userAccount 为指定用户取消userAccount
    * @param category 扩展参数，暂时没有用途，直接填null
    */
-  unsetUserAccount(userAccount: string, category: any) {
+  unsetUserAccount(userAccount: string, category: any = null) {
     MiPush.unsetUserAccount(userAccount, category);
   },
 
@@ -88,7 +95,7 @@ const MiPushNotifier = {
    * @param topic 某个用户设置订阅的主题
    * @param category 扩展参数，暂时没有用途，直接填null
    */
-  subscribe(topic: string, category: any) {
+  subscribe(topic: string, category: any = null) {
     MiPush.subscribe(topic, category);
   },
 
@@ -97,7 +104,7 @@ const MiPushNotifier = {
    * @param topic 某个用户设置订阅的主题
    * @param category 扩展参数，暂时没有用途，直接填null
    */
-  unsubscribe(topic: string, category: any) {
+  unsubscribe(topic: string, category: any = null) {
     MiPush.unsubscribe(topic, category);
   },
 
@@ -105,7 +112,7 @@ const MiPushNotifier = {
    * 暂停接收MiPush服务推送的消息
    * @param category 扩展参数，暂时没有用途，直接填null
    */
-  pausePush(category: any) {
+  pausePush(category: any = null) {
     MiPush.pausePush(category);
   },
 
@@ -113,7 +120,7 @@ const MiPushNotifier = {
    * @description 恢复接收MiPush服务推送的消息，这时服务器会把暂停时期的推送消息重新推送过来。
    * @param category  扩展参数，暂时没有用途，直接填null
    */
-  resumePush(category: any) {
+  resumePush(category: any = null) {
     MiPush.resumePush(category);
   },
 
@@ -178,7 +185,7 @@ const MiPushNotifier = {
    * @description 客户端设置通知消息的提醒类型
    * @param notifyType
    */
-  setLocalNotificationType(notifyType: number) {
+  setLocalNotificationType(notifyType: NotifyType) {
     MiPush.setLocalNotificationType(notifyType);
   },
 

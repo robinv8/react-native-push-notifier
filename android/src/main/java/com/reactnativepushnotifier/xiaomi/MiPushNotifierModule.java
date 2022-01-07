@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -20,6 +19,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.xiaomi.mipush.sdk.ErrorCode;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public class MiPushNotifierModule extends ReactContextBaseJavaModule {
 
 
 
-    final LocalBroadcastManager mgr = LocalBroadcastManager.getInstance(context);
+    final LocalBroadcastManager mgr = LocalBroadcastManager.getInstance(ctx);
 
     LifecycleEventListener listener = new LifecycleEventListener() {
       public void onHostResume() {
@@ -88,6 +88,9 @@ public class MiPushNotifierModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void registerPush(String appID, String appToken){
     MiPushClient.registerPush(getReactApplicationContext(), appID, appToken);
+
+    Log.i("registerPush", );
+
   }
 
   /**
@@ -276,7 +279,8 @@ public class MiPushNotifierModule extends ReactContextBaseJavaModule {
    */
   @ReactMethod
   public void getRegId(Promise promise) {
-    MiPushClient.getRegId(getReactApplicationContext());
+    String regId = MiPushClient.getRegId(getReactApplicationContext());
+    promise.resolve(regId);
   }
 
   private void processIntent(Intent intent) {

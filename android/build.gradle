@@ -56,5 +56,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"
-  implementation files('libs/MiPush_SDK_Client_4_9_0.jar')  // From node_modules
+    implementation"androidx.localbroadcastmanager:localbroadcastmanager:1.0.0"
+
+    implementation files('libs/MiPush_SDK_Client_4_9_0.jar')  // From node_modules
 }

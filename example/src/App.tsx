@@ -1,13 +1,21 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-push-notifier';
+import { MiPushNotifier } from 'react-native-push-notifier';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [result, setResult] = React.useState<number | undefined>(1212121);
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    MiPushNotifier.registerPush('2882303761517330064', '5911733016064');
+    MiPushNotifier.setUserAccount('1030000010113915');
+    MiPushNotifier.getRegId()
+      .then((res) => {
+        debugger;
+      })
+      .catch((err) => {
+        debugger;
+      });
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-package com.example.reactnativepushnotifier;
+package com.segmentfault.app;
 
 import android.app.Application;
 import android.content.Context;
