@@ -1,4 +1,4 @@
-package com.segmentfault.app;
+package com.example.reactnativepushnotifier;
 
 import android.app.Application;
 import android.content.Context;
@@ -10,6 +10,8 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+
+import com.reactnativepushnotifier.BuildConfig;
 import com.reactnativepushnotifier.PushNotifierPackage;
 
 public class MainApplication extends Application implements ReactApplication {

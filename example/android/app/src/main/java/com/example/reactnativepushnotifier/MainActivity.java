@@ -1,4 +1,4 @@
-package com.segmentfault.app;
+package com.example.reactnativepushnotifier;
 
 import com.facebook.react.ReactActivity;
 

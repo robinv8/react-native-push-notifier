@@ -88,9 +88,6 @@ public class MiPushNotifierModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void registerPush(String appID, String appToken){
     MiPushClient.registerPush(getReactApplicationContext(), appID, appToken);
-
-    Log.i("registerPush", );
-
   }
 
   /**
