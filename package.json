@@ -1,6 +1,6 @@
 {
   "name": "react-native-push-notifier",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "推送服务",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
