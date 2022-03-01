@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
-		5E555C0D2413F4C50049A1A2 /* PushNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* PushNotifier.m */; };
-
+		008A7108278ED082009A0099 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008A7107278ED081009A0099 /* UserNotifications.framework */; };
+		008A710D278ED0CA009A0099 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008A7109278ED091009A0099 /* libresolv.tbd */; };
+		008A710E278ED0D2009A0099 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008A710B278ED09A009A0099 /* libxml2.tbd */; };
+		008A7110278ED0DB009A0099 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 008A710F278ED0DB009A0099 /* libz.tbd */; };
+		008A7112278ED0E2009A0099 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008A7111278ED0E2009A0099 /* SystemConfiguration.framework */; };
+		008A7114278ED0EB009A0099 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008A7113278ED0EB009A0099 /* MobileCoreServices.framework */; };
+		008A7116278ED0F2009A0099 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008A7115278ED0F2009A0099 /* CFNetwork.framework */; };
+		008A7118278ED0FB009A0099 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008A7117278ED0FB009A0099 /* CoreTelephony.framework */; };
+		008A712E279002C9009A0099 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 008A712D279002C9009A0099 /* libMiPushSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,11 +31,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		008A7107278ED081009A0099 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/UserNotifications.framework; sourceTree = DEVELOPER_DIR; };
+		008A7109278ED091009A0099 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/lib/libresolv.tbd; sourceTree = DEVELOPER_DIR; };
+		008A710B278ED09A009A0099 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/lib/libxml2.tbd; sourceTree = DEVELOPER_DIR; };
+		008A710F278ED0DB009A0099 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		008A7111278ED0E2009A0099 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		008A7113278ED0EB009A0099 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/iOSSupport/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		008A7115278ED0F2009A0099 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		008A7117278ED0FB009A0099 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		008A712D279002C9009A0099 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
+		008A712F27900402009A0099 /* MiPushSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushSDK.h; sourceTree = "<group>"; };
 		134814201AA4EA6300B7C361 /* libPushNotifier.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPushNotifier.a; sourceTree = BUILT_PRODUCTS_DIR; };
-
 		B3E7B5881CC2AC0600A0062D /* PushNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotifier.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* PushNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNotifier.m; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,12 +51,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				008A7118278ED0FB009A0099 /* CoreTelephony.framework in Frameworks */,
+				008A7116278ED0F2009A0099 /* CFNetwork.framework in Frameworks */,
+				008A712E279002C9009A0099 /* libMiPushSDK.a in Frameworks */,
+				008A7114278ED0EB009A0099 /* MobileCoreServices.framework in Frameworks */,
+				008A7112278ED0E2009A0099 /* SystemConfiguration.framework in Frameworks */,
+				008A7110278ED0DB009A0099 /* libz.tbd in Frameworks */,
+				008A710E278ED0D2009A0099 /* libxml2.tbd in Frameworks */,
+				008A710D278ED0CA009A0099 /* libresolv.tbd in Frameworks */,
+				008A7108278ED082009A0099 /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		008A7106278ED081009A0099 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				008A7117278ED0FB009A0099 /* CoreTelephony.framework */,
+				008A7115278ED0F2009A0099 /* CFNetwork.framework */,
+				008A7113278ED0EB009A0099 /* MobileCoreServices.framework */,
+				008A7111278ED0E2009A0099 /* SystemConfiguration.framework */,
+				008A710F278ED0DB009A0099 /* libz.tbd */,
+				008A710B278ED09A009A0099 /* libxml2.tbd */,
+				008A7109278ED091009A0099 /* libresolv.tbd */,
+				008A7107278ED081009A0099 /* UserNotifications.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -54,11 +92,12 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-
+				008A712F27900402009A0099 /* MiPushSDK.h */,
+				008A712D279002C9009A0099 /* libMiPushSDK.a */,
 				B3E7B5881CC2AC0600A0062D /* PushNotifier.h */,
 				B3E7B5891CC2AC0600A0062D /* PushNotifier.m */,
-
 				134814211AA4EA7D00B7C361 /* Products */,
+				008A7106278ED081009A0099 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,9 +158,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
-				B3E7B58A1CC2AC0600A0062D /* PushNotifier.m in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,11 +266,14 @@
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libMiPushSDK",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PushNotifier;
 				SKIP_INSTALL = YES;
-
 			};
 			name = Debug;
 		};
@@ -247,11 +286,14 @@
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libMiPushSDK",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = PushNotifier;
 				SKIP_INSTALL = YES;
-
 			};
 			name = Release;
 		};
