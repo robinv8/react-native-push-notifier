@@ -10,13 +10,7 @@ npm install react-native-push-notifier
 
 ## Usage
 
-```js
-import { multiply } from "react-native-push-notifier";
 
-// ...
-
-const result = await multiply(3, 7);
-```
 
 ## Contributing
 
