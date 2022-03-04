@@ -25,6 +25,13 @@ enum NotifyType {
 }
 const MiPushNotifier = {
   /**
+   * @description 获取初始数据
+   * @returns
+   */
+  getInitialMessage: () =>{
+    return MiPush.getInitialMessage();
+  },
+  /**
    * @description 注册MiPush推送服务
    * @param appId 在开发者网站上注册时生成的，MiPush推送服务颁发给app的唯一认证标识
    * @param appToken 在开发者网站上注册时生成的，与appID相对应，用于验证appID是否合法

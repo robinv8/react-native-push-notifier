@@ -1,5 +1,7 @@
 package com.reactnativepushnotifier;
 
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
 
 import com.facebook.react.ReactPackage;
@@ -13,11 +15,28 @@ import java.util.Collections;
 import java.util.List;
 
 public class PushNotifierPackage implements ReactPackage {
+    private MiPushNotifierModule miPushNotifierModule;
+    private Intent mIntent;
+
+    public void onIntent(Intent intent) {
+      if (miPushNotifierModule != null) {
+        miPushNotifierModule.onIntent(intent);
+      } else {
+        mIntent = intent;
+      }
+    }
+
     @NonNull
     @Override
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
-        List<NativeModule> modules = new ArrayList<>();
-        modules.add(new MiPushNotifierModule(reactContext));
+      miPushNotifierModule = new MiPushNotifierModule(reactContext);
+      if (mIntent != null) {
+        miPushNotifierModule.onIntent(mIntent);
+        mIntent = null;
+      }
+
+      List<NativeModule> modules = new ArrayList<>();
+      modules.add(miPushNotifierModule);
       return modules;
     }
 

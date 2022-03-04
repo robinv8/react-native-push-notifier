@@ -2,9 +2,18 @@ package com.reactnativepushnotifier.xiaomi;
 
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -19,11 +28,48 @@ import java.util.List;
 @ReactModule(name = MiPushNotifierModule.NAME)
 public class MiPushNotifierModule extends ReactContextBaseJavaModule {
   public static final String NAME = "MiPushNotifier";
+  private Intent mIntent;
 
-  public static ReactApplicationContext reactContext;
   public MiPushNotifierModule(ReactApplicationContext context) {
     super(context);
-    reactContext = context;
+
+    final ReactApplicationContext ctx = context;
+
+    final BroadcastReceiver receiver = new BroadcastReceiver() {
+      @Override
+      public void onReceive(Context context, Intent intent) {
+        Bundle bundle = intent.getExtras();
+        WritableMap params = Arguments.fromBundle(bundle);
+
+        sendEvent(params);
+      }
+    };
+
+    final LocalBroadcastManager mgr = LocalBroadcastManager.getInstance(context);
+
+    LifecycleEventListener listener = new LifecycleEventListener() {
+      public void onHostResume() {
+        mgr.registerReceiver(receiver, new IntentFilter("xiaomipush"));
+      }
+
+      public void onHostPause() {
+        try {
+          mgr.unregisterReceiver(receiver);
+        } catch (java.lang.IllegalArgumentException e) {
+          Log.e(MiPushNotifierModule.class.getName(), "receiver not registered", e);
+        }
+      }
+
+      public void onHostDestroy() {
+        try {
+          mgr.unregisterReceiver(receiver);
+        } catch (java.lang.IllegalArgumentException e) {
+          Log.e(MiPushNotifierModule.class.getName(), "receiver not registered", e);
+        }
+      }
+    };
+
+    context.addLifecycleEventListener(listener);
   }
 
   @Override
@@ -32,6 +78,15 @@ public class MiPushNotifierModule extends ReactContextBaseJavaModule {
     return NAME;
   }
 
+  @ReactMethod
+  public void getInitialMessage(Promise promise) {
+    WritableMap params = MIPushHelper.getDataOfIntent(mIntent);
+    // Add missing NOTIFICATION_MESSAGE_CLICKED message in PushMessageReceiver
+    if (params != null) {
+      params.putString("type", "NOTIFICATION_MESSAGE_CLICKED");
+    }
+    promise.resolve(params);
+  }
   /**
    * 注册MiPush推送服务
    * @param appID 在开发者网站上注册时生成的，MiPush推送服务颁发给app的唯一认证标识
@@ -232,4 +287,32 @@ public class MiPushNotifierModule extends ReactContextBaseJavaModule {
     promise.resolve(regId);
   }
 
+  public void onIntent(Intent intent) {
+    final ReactApplicationContext ctx = getReactApplicationContext();
+
+    if (!ctx.hasActiveCatalystInstance()) {
+      mIntent = intent;
+    } else {
+      processIntent(intent);
+    }
+
+  }
+
+  private void processIntent(Intent intent) {
+    WritableMap params = MIPushHelper.getDataOfIntent(intent);
+    if (params != null) {
+      params.putString("type", "NOTIFICATION_MESSAGE_CLICKED");
+    }
+    sendEvent(params);
+  }
+
+  private void sendEvent(WritableMap params) {
+    final ReactApplicationContext ctx = getReactApplicationContext();
+
+    if (ctx.hasActiveCatalystInstance()) {
+      ctx
+        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+        .emit("xiaomipush", params);
+    }
+  }
 }

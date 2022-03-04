@@ -1,7 +1,11 @@
 package com.reactnativepushnotifier.xiaomi;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
@@ -13,7 +17,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MiPushHelper {
+
+class MIPushHelper {
+
   public static WritableMap getDataOfIntent(Intent intent) {
     if (intent == null) {
       return null;

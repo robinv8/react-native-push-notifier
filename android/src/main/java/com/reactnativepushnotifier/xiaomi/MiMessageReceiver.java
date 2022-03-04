@@ -2,9 +2,13 @@ package com.reactnativepushnotifier.xiaomi;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.reactnativepushnotifier.R;
 import com.xiaomi.mipush.sdk.ErrorCode;
@@ -15,6 +19,7 @@ import com.xiaomi.mipush.sdk.PushMessageReceiver;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -50,69 +55,54 @@ import java.util.List;
 public class MiMessageReceiver extends PushMessageReceiver {
 
   private String mRegId;
+  private long mResultCode = -1;
+  private String mReason;
+  private String mCommand;
+  private String mMessage;
   private String mTopic;
   private String mAlias;
-  private String mAccount;
   private String mStartTime;
   private String mEndTime;
+  private String mAccount;
 
   @Override
   public void onReceivePassThroughMessage(Context context, MiPushMessage message) {
-    Log.v(MiPushApplication.TAG,
-      "onReceivePassThroughMessage is called. " + message.toString());
-    String log = context.getString(R.string.recv_passthrough_message, message.getContent());
-
-    if (!TextUtils.isEmpty(message.getTopic())) {
-      mTopic = message.getTopic();
-    } else if (!TextUtils.isEmpty(message.getAlias())) {
+    mMessage = message.getContent();
+    if(!TextUtils.isEmpty(message.getTopic())) {
+      mTopic=message.getTopic();
+    } else if(!TextUtils.isEmpty(message.getAlias())) {
       mAlias = message.getAlias();
     }
 
-    Message msg = Message.obtain();
-    msg.obj = log;
-    MiPushApplication.getHandler().sendMessage(msg);
+    broadcastMessage(context, "RECEIVE_PASS_THROUGH", message.toBundle());
   }
 
   @Override
   public void onNotificationMessageClicked(Context context, MiPushMessage message) {
-    Log.v(MiPushApplication.TAG,
-      "onNotificationMessageClicked is called. " + message.toString());
-    String log = context.getString(R.string.click_notification_message, message.getContent());
-
-    if (!TextUtils.isEmpty(message.getTopic())) {
-      mTopic = message.getTopic();
-    } else if (!TextUtils.isEmpty(message.getAlias())) {
-      mAlias = message.getAlias();
+    mMessage = message.getContent();
+    if(!TextUtils.isEmpty(message.getTopic())) {
+      mTopic=message.getTopic();
+    } else if(!TextUtils.isEmpty(message.getAlias())) {
+      mAlias=message.getAlias();
     }
 
-    Message msg = Message.obtain();
-    if (message.isNotified()) {
-      msg.obj = log;
-    }
-    MiPushApplication.getHandler().sendMessage(msg);
+    broadcastMessage(context, "NOTIFICATION_MESSAGE_CLICKED", message.toBundle());
   }
 
   @Override
   public void onNotificationMessageArrived(Context context, MiPushMessage message) {
-    Log.v(MiPushApplication.TAG,
-      "onNotificationMessageArrived is called. " + message.toString());
-    String log = context.getString(R.string.arrive_notification_message, message.getContent());
-
-    if (!TextUtils.isEmpty(message.getTopic())) {
-      mTopic = message.getTopic();
-    } else if (!TextUtils.isEmpty(message.getAlias())) {
-      mAlias = message.getAlias();
+    mMessage = message.getContent();
+    if(!TextUtils.isEmpty(message.getTopic())) {
+      mTopic=message.getTopic();
+    } else if(!TextUtils.isEmpty(message.getAlias())) {
+      mAlias=message.getAlias();
     }
 
-    Message msg = Message.obtain();
-    msg.obj = log;
-    MiPushApplication.getHandler().sendMessage(msg);
+    broadcastMessage(context, "NOTIFICATION_MESSAGE_ARRIVED", message.toBundle());
   }
 
   @Override
   public void onCommandResult(Context context, MiPushCommandMessage message) {
-    Log.v(MiPushApplication.TAG,
-      "onCommandResult is called. " + message.toString());
     String command = message.getCommand();
     List<String> arguments = message.getCommandArguments();
     String cmdArg1 = ((arguments != null && arguments.size() > 0) ? arguments.get(0) : null);
@@ -178,39 +168,54 @@ public class MiMessageReceiver extends PushMessageReceiver {
     } else {
       log = message.getReason();
     }
-
-    Message msg = Message.obtain();
-    msg.obj = log;
-    MiPushApplication.getHandler().sendMessage(msg);
+    broadcastMessage(context, "COMMAND_RESULT");
   }
 
   @Override
   public void onReceiveRegisterResult(Context context, MiPushCommandMessage message) {
-    Log.v(MiPushApplication.TAG,
-      "onReceiveRegisterResult is called. " + message.toString());
     String command = message.getCommand();
     List<String> arguments = message.getCommandArguments();
     String cmdArg1 = ((arguments != null && arguments.size() > 0) ? arguments.get(0) : null);
-    String log;
+    String cmdArg2 = ((arguments != null && arguments.size() > 1) ? arguments.get(1) : null);
     if (MiPushClient.COMMAND_REGISTER.equals(command)) {
       if (message.getResultCode() == ErrorCode.SUCCESS) {
         mRegId = cmdArg1;
-        log = context.getString(R.string.register_success);
-      } else {
-        log = context.getString(R.string.register_fail);
       }
-    } else {
-      log = message.getReason();
     }
-
-    Message msg = Message.obtain();
-    msg.obj = log;
-    MiPushApplication.getHandler().sendMessage(msg);
+    broadcastMessage(context, "RECEIVE_REGISTER_RESULT");
   }
 
-  @SuppressLint("SimpleDateFormat")
-  private static String getSimpleDate() {
-    return new SimpleDateFormat("MM-dd hh:mm:ss").format(new Date());
+
+  private void broadcastMessage(Context context, String type) {
+    Bundle bundle = new Bundle();
+    bundle.putString("regId", mRegId);
+    bundle.putInt("resultCode", (int)mResultCode);
+    bundle.putString("reason", mReason);
+    bundle.putString("command", mCommand);
+    bundle.putString("message", mMessage);
+    bundle.putString("topic", mTopic);
+    bundle.putString("alias", mAlias);
+    bundle.putString("startTime", mStartTime);
+    bundle.putString("endTime", mEndTime);
+
+    broadcastMessage(context, type, bundle);
   }
 
+  private void broadcastMessage(Context context, String type, Bundle bundle) {
+    bundle.putString("type", type);
+    HashMap<String, String> extra = (HashMap<String, String>)bundle.getSerializable("extra");
+    if (extra != null) {
+      Bundle extraBundle = new Bundle();
+      for (String key: extra.keySet()) {
+        String value = extra.get(key);
+        extraBundle.putString(key, value);
+      }
+      bundle.putBundle("extra", extraBundle);
+    }
+    Intent intent = new Intent("xiaomipush");
+    intent.putExtras(bundle);
+
+    LocalBroadcastManager mgr = LocalBroadcastManager.getInstance(context);
+    mgr.sendBroadcast(intent);
+  }
 }
