@@ -29,8 +29,6 @@ import java.util.List;
  */
 public class MiPushApplication extends Application {
 
-
-
     // 此TAG在adb logcat中检索自己所需要的信息， 只需在命令行终端输入 adb logcat | grep
     // com.xiaomi.mipushdemo
     public static final String TAG = "rnmipush";
