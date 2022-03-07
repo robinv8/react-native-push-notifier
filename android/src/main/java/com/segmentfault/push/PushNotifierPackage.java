@@ -1,4 +1,4 @@
-package com.reactnativepushnotifier;
+package com.segmentfault.push;
 
 import android.content.Intent;
 
@@ -9,7 +9,7 @@ import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
-import com.reactnativepushnotifier.xiaomi.MiPushNotifierModule;
+import com.segmentfault.push.xiaomi.MiPushNotifierModule;
 
 import java.util.ArrayList;
 import java.util.Collections;

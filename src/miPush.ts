@@ -28,7 +28,7 @@ const MiPushNotifier = {
    * @description 获取初始数据
    * @returns
    */
-  getInitialMessage: () =>{
+  getInitialMessage: () => {
     return MiPush.getInitialMessage();
   },
   /**

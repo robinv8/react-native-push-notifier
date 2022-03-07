@@ -1,6 +1,4 @@
-package com.reactnativepushnotifier.xiaomi;
-
-
+package com.segmentfault.push.xiaomi;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

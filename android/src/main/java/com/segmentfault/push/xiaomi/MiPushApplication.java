@@ -1,24 +1,15 @@
-package com.reactnativepushnotifier.xiaomi;
+package com.segmentfault.push.xiaomi;
 
-import android.app.ActivityManager;
-import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Process;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.xiaomi.channel.commonutils.logger.LoggerInterface;
 import com.xiaomi.mipush.sdk.Logger;
-import com.xiaomi.mipush.sdk.MiPushClient;
-
-import java.util.List;
 
 /**
  * 1、为了打开客户端的日志，便于在开发过程中调试，需要自定义一个 Application。
