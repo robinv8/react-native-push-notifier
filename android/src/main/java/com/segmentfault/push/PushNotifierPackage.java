@@ -41,11 +41,6 @@ public class PushNotifierPackage implements ReactPackage {
       return modules;
     }
 
-  @Override
-  public List<Class<? extends JavaScriptModule>> createJSModules() {
-    return new ArrayList<>();
-  }
-
   @NonNull
     @Override
     public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
