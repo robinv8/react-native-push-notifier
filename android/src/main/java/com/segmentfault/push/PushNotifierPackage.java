@@ -16,30 +16,30 @@ import java.util.Collections;
 import java.util.List;
 
 public class PushNotifierPackage implements ReactPackage {
-    private MiPushNotifierModule miPushNotifierModule;
-    private Intent mIntent;
+  private MiPushNotifierModule miPushNotifierModule;
+  private Intent mIntent;
 
-    public void onIntent(Intent intent) {
-      if (miPushNotifierModule != null) {
-        miPushNotifierModule.onIntent(intent);
-      } else {
-        mIntent = intent;
-      }
+  public void onIntent(Intent intent) {
+    if (miPushNotifierModule != null) {
+      miPushNotifierModule.onIntent(intent);
+    } else {
+      mIntent = intent;
+    }
+  }
+
+  @NonNull
+  @Override
+  public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
+    miPushNotifierModule = new MiPushNotifierModule(reactContext);
+    if (mIntent != null) {
+      miPushNotifierModule.onIntent(mIntent);
+      mIntent = null;
     }
 
-    @NonNull
-    @Override
-    public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
-      miPushNotifierModule = new MiPushNotifierModule(reactContext);
-      if (mIntent != null) {
-        miPushNotifierModule.onIntent(mIntent);
-        mIntent = null;
-      }
-
-      List<NativeModule> modules = new ArrayList<>();
-      modules.add(miPushNotifierModule);
-      return modules;
-    }
+    List<NativeModule> modules = new ArrayList<>();
+    modules.add(miPushNotifierModule);
+    return modules;
+  }
 
   @Override
   public List<Class<? extends JavaScriptModule>> createJSModules() {
@@ -47,8 +47,8 @@ public class PushNotifierPackage implements ReactPackage {
   }
 
   @NonNull
-    @Override
-    public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
-        return Collections.emptyList();
-    }
+  @Override
+  public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
+    return Collections.emptyList();
+  }
 }
